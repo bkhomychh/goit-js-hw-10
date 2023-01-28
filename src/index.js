@@ -17,9 +17,9 @@ refs.searchBox.addEventListener(
 
 function onSearchBoxInput({ target }) {
   const inputValue = target.value.trim();
+  clearFields();
 
   if (!inputValue) {
-    clearFields();
     return;
   }
 
@@ -35,17 +35,13 @@ function onSearchBoxInput({ target }) {
       }
 
       if (numberCountries >= 2 && numberCountries <= 10) {
-        clearFields();
         refs.countryList.innerHTML = createCountryListMarkup(countries);
         return;
       }
 
-      clearFields();
       refs.countryInfo.innerHTML = createCountryMarkup(countries[0]);
     })
     .catch(err => {
-      clearFields();
-
       if (err.message === '404') {
         Notify.failure('Oops, there is no country with that name');
       } else {
